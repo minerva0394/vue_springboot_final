@@ -60,5 +60,9 @@ public class User implements Serializable {
     @ApiModelProperty("头像")
     private String avatar;
 
+    @ApiModelProperty("角色")
+    private String role;
+
+
 
 }
