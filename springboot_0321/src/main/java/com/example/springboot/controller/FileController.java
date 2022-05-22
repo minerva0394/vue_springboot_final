@@ -72,6 +72,8 @@ public class FileController {
             file.transferTo(uploadFile);
             // 数据库若不存在重复文件，则不删除刚才上传的文件
             url = "http://localhost:9091/file/" + fileUUID;
+            // 远端
+//            url = "http://120.24.6.28:9091/file/" + fileUUID;
         }
 
         // 存储数据库

@@ -11,11 +11,33 @@
  Target Server Version : 80027
  File Encoding         : 65001
 
- Date: 27/03/2022 12:41:49
+ Date: 05/04/2022 23:00:29
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for article
+-- ----------------------------
+DROP TABLE IF EXISTS `article`;
+CREATE TABLE `article` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL COMMENT '标题',
+  `content` text COMMENT '内容',
+  `user` varchar(50) DEFAULT NULL COMMENT '发布人',
+  `time` varchar(50) DEFAULT NULL COMMENT '发布时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
+
+-- ----------------------------
+-- Records of article
+-- ----------------------------
+BEGIN;
+INSERT INTO `article` (`id`, `name`, `content`, `user`, `time`) VALUES (2, 'f\'da', '打', 'admin', '2022-04-05 22:53:59');
+INSERT INTO `article` (`id`, `name`, `content`, `user`, `time`) VALUES (3, '测试文章', '# 测试文章\n## test2\n![头像3.jpg](http://localhost:9091/file/00b415f336824276bacec0ae9f2e1a25.jpg)', 'admin', '2022-04-05 22:55:51');
+INSERT INTO `article` (`id`, `name`, `content`, `user`, `time`) VALUES (5, '呃', '234', 'admin', '2022-04-05 22:57:22');
+COMMIT;
 
 -- ----------------------------
 -- Table structure for sys_dict
@@ -37,6 +59,9 @@ INSERT INTO `sys_dict` (`name`, `value`, `type`) VALUES ('role', 'el-icon-s-plat
 INSERT INTO `sys_dict` (`name`, `value`, `type`) VALUES ('menu', 'el-icon-s-data', 'icon');
 INSERT INTO `sys_dict` (`name`, `value`, `type`) VALUES ('file', 'el-icon-document', 'icon');
 INSERT INTO `sys_dict` (`name`, `value`, `type`) VALUES ('system', 'el-icon-menu', 'icon');
+INSERT INTO `sys_dict` (`name`, `value`, `type`) VALUES ('map', 'el-icon-map-location', 'icon');
+INSERT INTO `sys_dict` (`name`, `value`, `type`) VALUES ('dashbord', 'el-icon-s-marketing', 'icon');
+INSERT INTO `sys_dict` (`name`, `value`, `type`) VALUES ('article', 'el-icon-document', 'icon');
 COMMIT;
 
 -- ----------------------------
@@ -53,45 +78,18 @@ CREATE TABLE `sys_file` (
   `enable` tinyint(1) DEFAULT '1' COMMENT '是否禁用 0：不可用、1：可用',
   `md5` varchar(255) DEFAULT NULL COMMENT '文件md5',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8mb3;
 
 -- ----------------------------
 -- Records of sys_file
 -- ----------------------------
 BEGIN;
-INSERT INTO `sys_file` (`id`, `name`, `type`, `size`, `url`, `is_delete`, `enable`, `md5`) VALUES (20, 'bg.png', 'png', 74, 'http://localhost:9091/file/aacf3d4ea641416d8a26a5c7fa856c10.png', 1, 1, '142445a7ba8ae704551eb21f3a96cadf');
-INSERT INTO `sys_file` (`id`, `name`, `type`, `size`, `url`, `is_delete`, `enable`, `md5`) VALUES (21, '班级姓名.docx', 'docx', 18, 'http://localhost:9091/file/708181dafbb34542973079bbbd34a7b5.docx', 0, 1, '298dc9ece360a93dec8572539cd8808d');
-INSERT INTO `sys_file` (`id`, `name`, `type`, `size`, `url`, `is_delete`, `enable`, `md5`) VALUES (22, 'bg.png', 'png', 74, 'http://localhost:9091/file/aacf3d4ea641416d8a26a5c7fa856c10.png', 0, 1, '142445a7ba8ae704551eb21f3a96cadf');
-INSERT INTO `sys_file` (`id`, `name`, `type`, `size`, `url`, `is_delete`, `enable`, `md5`) VALUES (23, 'IMG_5453.JPG', 'JPG', 553, 'http://localhost:9091/file/89bc13109cd44451a19c2123c130696b.JPG', 0, 1, 'a90045e304ac8122768787fcdac086a3');
-INSERT INTO `sys_file` (`id`, `name`, `type`, `size`, `url`, `is_delete`, `enable`, `md5`) VALUES (24, '65101164_p0.jpeg', 'jpeg', 663, 'http://localhost:9091/file/4319a30787bc420da7d9513c46db28af.jpeg', 0, 1, '8c6feb8e7532e909c3427ac5b23ba4b3');
-INSERT INTO `sys_file` (`id`, `name`, `type`, `size`, `url`, `is_delete`, `enable`, `md5`) VALUES (25, '89bc13109cd44451a19c2123c130696b.JPG', 'JPG', 553, 'http://localhost:9091/file/89bc13109cd44451a19c2123c130696b.JPG', 1, 1, 'a90045e304ac8122768787fcdac086a3');
-INSERT INTO `sys_file` (`id`, `name`, `type`, `size`, `url`, `is_delete`, `enable`, `md5`) VALUES (26, 'IMG_5453-3.JPG', 'JPG', 180, 'http://localhost:9091/file/85ee9daa1f8343c592f16e49a1a10648.JPG', 1, 1, '8f3ca78033e34733eceb844e64896394');
-INSERT INTO `sys_file` (`id`, `name`, `type`, `size`, `url`, `is_delete`, `enable`, `md5`) VALUES (27, 'QQ20211031-0.jpg', 'jpg', 154, 'http://localhost:9091/file/5d972ca209ce4923a4fd0c31f1df403b.jpg', 1, 1, '45b87a4a5255e7cfdfbaa5a5bcc1c5de');
-INSERT INTO `sys_file` (`id`, `name`, `type`, `size`, `url`, `is_delete`, `enable`, `md5`) VALUES (28, 'QQ20211031-0.jpg', 'jpg', 154, 'http://localhost:9091/file/5d972ca209ce4923a4fd0c31f1df403b.jpg', 1, 1, '45b87a4a5255e7cfdfbaa5a5bcc1c5de');
-INSERT INTO `sys_file` (`id`, `name`, `type`, `size`, `url`, `is_delete`, `enable`, `md5`) VALUES (29, 'shark.jpg', 'jpg', 829, 'http://localhost:9091/file/44243889cc0c41f6ad6c6a255c8f6ed6.jpg', 1, 1, 'd575f151ac786d9ec150693c1e5f20d4');
-INSERT INTO `sys_file` (`id`, `name`, `type`, `size`, `url`, `is_delete`, `enable`, `md5`) VALUES (30, 'IMG_5453-3.JPG', 'JPG', 180, 'http://localhost:9091/file/85ee9daa1f8343c592f16e49a1a10648.JPG', 1, 1, '8f3ca78033e34733eceb844e64896394');
-INSERT INTO `sys_file` (`id`, `name`, `type`, `size`, `url`, `is_delete`, `enable`, `md5`) VALUES (31, 'QQ20211031-0.jpg', 'jpg', 154, 'http://localhost:9091/file/5d972ca209ce4923a4fd0c31f1df403b.jpg', 1, 1, '45b87a4a5255e7cfdfbaa5a5bcc1c5de');
-INSERT INTO `sys_file` (`id`, `name`, `type`, `size`, `url`, `is_delete`, `enable`, `md5`) VALUES (32, 'shark.jpg', 'jpg', 829, 'http://localhost:9091/file/44243889cc0c41f6ad6c6a255c8f6ed6.jpg', 1, 1, 'd575f151ac786d9ec150693c1e5f20d4');
-INSERT INTO `sys_file` (`id`, `name`, `type`, `size`, `url`, `is_delete`, `enable`, `md5`) VALUES (33, 'IMG_5453-3.JPG', 'JPG', 180, 'http://localhost:9091/file/85ee9daa1f8343c592f16e49a1a10648.JPG', 1, 1, '8f3ca78033e34733eceb844e64896394');
-INSERT INTO `sys_file` (`id`, `name`, `type`, `size`, `url`, `is_delete`, `enable`, `md5`) VALUES (34, 'shark.jpg', 'jpg', 829, 'http://localhost:9091/file/44243889cc0c41f6ad6c6a255c8f6ed6.jpg', 1, 1, 'd575f151ac786d9ec150693c1e5f20d4');
-INSERT INTO `sys_file` (`id`, `name`, `type`, `size`, `url`, `is_delete`, `enable`, `md5`) VALUES (35, 'QQ20211031-0.jpg', 'jpg', 154, 'http://localhost:9091/file/5d972ca209ce4923a4fd0c31f1df403b.jpg', 1, 1, '45b87a4a5255e7cfdfbaa5a5bcc1c5de');
-INSERT INTO `sys_file` (`id`, `name`, `type`, `size`, `url`, `is_delete`, `enable`, `md5`) VALUES (36, 'shark.jpg', 'jpg', 829, 'http://localhost:9091/file/44243889cc0c41f6ad6c6a255c8f6ed6.jpg', 1, 1, 'd575f151ac786d9ec150693c1e5f20d4');
-INSERT INTO `sys_file` (`id`, `name`, `type`, `size`, `url`, `is_delete`, `enable`, `md5`) VALUES (37, 'QQ20211031-0.jpg', 'jpg', 154, 'http://localhost:9091/file/5d972ca209ce4923a4fd0c31f1df403b.jpg', 1, 1, '45b87a4a5255e7cfdfbaa5a5bcc1c5de');
-INSERT INTO `sys_file` (`id`, `name`, `type`, `size`, `url`, `is_delete`, `enable`, `md5`) VALUES (38, 'IMG_5453-3.JPG', 'JPG', 180, 'http://localhost:9091/file/85ee9daa1f8343c592f16e49a1a10648.JPG', 1, 1, '8f3ca78033e34733eceb844e64896394');
-INSERT INTO `sys_file` (`id`, `name`, `type`, `size`, `url`, `is_delete`, `enable`, `md5`) VALUES (39, 'QQ20211031-0.jpg', 'jpg', 154, 'http://localhost:9091/file/5d972ca209ce4923a4fd0c31f1df403b.jpg', 1, 1, '45b87a4a5255e7cfdfbaa5a5bcc1c5de');
-INSERT INTO `sys_file` (`id`, `name`, `type`, `size`, `url`, `is_delete`, `enable`, `md5`) VALUES (40, 'f5bcb34fccddb5dbd45bb53e4c3f872f.jpg', 'jpg', 32, 'http://localhost:9091/file/862a74021f9d4f35ad6c326b789eaecb.jpg', 1, 1, 'dd483d1d6e4dc38c0b71d2922e9dbff2');
-INSERT INTO `sys_file` (`id`, `name`, `type`, `size`, `url`, `is_delete`, `enable`, `md5`) VALUES (41, '头像2.jpg', 'jpg', 168, 'http://localhost:9091/file/440e5b683fee44b49d9f4d0331ede42b.jpg', 0, 1, '57dff6b6d804af87fdaca5a4330c046c');
-INSERT INTO `sys_file` (`id`, `name`, `type`, `size`, `url`, `is_delete`, `enable`, `md5`) VALUES (42, '头像4.jpg', 'jpg', 140, 'http://localhost:9091/file/cdada16043364dc08e0e13ffb43cf379.jpg', 0, 1, 'dac85d6677a56405dcaf5ccae9efcac9');
-INSERT INTO `sys_file` (`id`, `name`, `type`, `size`, `url`, `is_delete`, `enable`, `md5`) VALUES (43, '头像3.jpg', 'jpg', 213, 'http://localhost:9091/file/b0a72b62891f4fa6991cd1bd71e6dbb5.jpg', 0, 1, '20349becce1db751f5cdbd20dc94ed9c');
-INSERT INTO `sys_file` (`id`, `name`, `type`, `size`, `url`, `is_delete`, `enable`, `md5`) VALUES (44, '头像1.jpg', 'jpg', 31, 'http://localhost:9091/file/19e3358c60ea42e3b9a0a2a6f93c147d.jpg', 0, 1, 'b79c0e3e17c05aec371f2c931c3eed84');
-INSERT INTO `sys_file` (`id`, `name`, `type`, `size`, `url`, `is_delete`, `enable`, `md5`) VALUES (45, '头像5.jpg', 'jpg', 32, 'http://localhost:9091/file/862a74021f9d4f35ad6c326b789eaecb.jpg', 0, 1, 'dd483d1d6e4dc38c0b71d2922e9dbff2');
-INSERT INTO `sys_file` (`id`, `name`, `type`, `size`, `url`, `is_delete`, `enable`, `md5`) VALUES (46, '头像6.jpg', 'jpg', 63, 'http://localhost:9091/file/a022536d9fbb497fb78578ab619ec5a4.jpg', 0, 1, '4c876f1d23ebbd6e64d89da4bcc70adb');
-INSERT INTO `sys_file` (`id`, `name`, `type`, `size`, `url`, `is_delete`, `enable`, `md5`) VALUES (47, '角色.xlsx', 'xlsx', 12, 'http://localhost:9091/file/9e8d0da3edb249559d5e8fdbe0fb25a5.xlsx', 1, 1, '220e63f1f74927bed908402d8c7404d4');
-INSERT INTO `sys_file` (`id`, `name`, `type`, `size`, `url`, `is_delete`, `enable`, `md5`) VALUES (48, '副本附件3：信息学院2021年寒假假期计划离校时间(1).xlsx', 'xlsx', 36, 'http://localhost:9091/file/54d1a907c92a45e0b441f91b9190d09c.xlsx', 1, 1, '8eef9c6a5e81942ea80da9512848fa81');
-INSERT INTO `sys_file` (`id`, `name`, `type`, `size`, `url`, `is_delete`, `enable`, `md5`) VALUES (49, '角色.xlsx', 'xlsx', 12, 'http://localhost:9091/file/9e8d0da3edb249559d5e8fdbe0fb25a5.xlsx', 0, 1, '220e63f1f74927bed908402d8c7404d4');
-INSERT INTO `sys_file` (`id`, `name`, `type`, `size`, `url`, `is_delete`, `enable`, `md5`) VALUES (50, '演示文稿1.pptx', 'pptx', 32, 'http://localhost:9091/file/ba7efc5a87304aa8843ef961a1b22063.pptx', 0, 1, 'b6d6aaef0050bd93eb0be68a2ea3c5be');
-INSERT INTO `sys_file` (`id`, `name`, `type`, `size`, `url`, `is_delete`, `enable`, `md5`) VALUES (59, '头像1.jpg', 'jpg', 31, 'http://localhost:9091/file/19e3358c60ea42e3b9a0a2a6f93c147d.jpg', 0, 1, 'b79c0e3e17c05aec371f2c931c3eed84');
-INSERT INTO `sys_file` (`id`, `name`, `type`, `size`, `url`, `is_delete`, `enable`, `md5`) VALUES (60, '头像5.jpg', 'jpg', 32, 'http://localhost:9091/file/862a74021f9d4f35ad6c326b789eaecb.jpg', 0, 1, 'dd483d1d6e4dc38c0b71d2922e9dbff2');
+INSERT INTO `sys_file` (`id`, `name`, `type`, `size`, `url`, `is_delete`, `enable`, `md5`) VALUES (62, '头像3.jpg', 'jpg', 213, 'http://localhost:9091/file/00b415f336824276bacec0ae9f2e1a25.jpg', 0, 1, '20349becce1db751f5cdbd20dc94ed9c');
+INSERT INTO `sys_file` (`id`, `name`, `type`, `size`, `url`, `is_delete`, `enable`, `md5`) VALUES (63, '头像3.jpg', 'jpg', 213, 'http://localhost:9091/file/00b415f336824276bacec0ae9f2e1a25.jpg', 0, 1, '20349becce1db751f5cdbd20dc94ed9c');
+INSERT INTO `sys_file` (`id`, `name`, `type`, `size`, `url`, `is_delete`, `enable`, `md5`) VALUES (64, '头像1.jpg', 'jpg', 31, 'http://localhost:9091/file/7b97882d718d435db684310eb810e03c.jpg', 0, 1, 'b79c0e3e17c05aec371f2c931c3eed84');
+INSERT INTO `sys_file` (`id`, `name`, `type`, `size`, `url`, `is_delete`, `enable`, `md5`) VALUES (65, '头像5.jpg', 'jpg', 32, 'http://localhost:9091/file/52c02ef913b14754a106c9c830172497.jpg', 0, 1, 'dd483d1d6e4dc38c0b71d2922e9dbff2');
+INSERT INTO `sys_file` (`id`, `name`, `type`, `size`, `url`, `is_delete`, `enable`, `md5`) VALUES (66, '头像1.jpg', 'jpg', 31, 'http://localhost:9091/file/7b97882d718d435db684310eb810e03c.jpg', 0, 1, 'b79c0e3e17c05aec371f2c931c3eed84');
+INSERT INTO `sys_file` (`id`, `name`, `type`, `size`, `url`, `is_delete`, `enable`, `md5`) VALUES (67, '头像3.jpg', 'jpg', 213, 'http://localhost:9091/file/00b415f336824276bacec0ae9f2e1a25.jpg', 0, 1, '20349becce1db751f5cdbd20dc94ed9c');
 COMMIT;
 
 -- ----------------------------
@@ -107,7 +105,7 @@ CREATE TABLE `sys_menu` (
   `pid` int DEFAULT NULL COMMENT '父级id',
   `page_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '页面路径',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb3;
 
 -- ----------------------------
 -- Records of sys_menu
@@ -117,8 +115,11 @@ INSERT INTO `sys_menu` (`id`, `name`, `path`, `icon`, `description`, `pid`, `pag
 INSERT INTO `sys_menu` (`id`, `name`, `path`, `icon`, `description`, `pid`, `page_path`) VALUES (4, '系统管理', NULL, 'el-icon-menu', NULL, NULL, NULL);
 INSERT INTO `sys_menu` (`id`, `name`, `path`, `icon`, `description`, `pid`, `page_path`) VALUES (5, '用户管理', '/user', 'el-icon-s-custom', NULL, 4, 'User');
 INSERT INTO `sys_menu` (`id`, `name`, `path`, `icon`, `description`, `pid`, `page_path`) VALUES (6, '角色管理', '/role', 'el-icon-s-platform', NULL, 4, 'Role');
-INSERT INTO `sys_menu` (`id`, `name`, `path`, `icon`, `description`, `pid`, `page_path`) VALUES (7, '菜单管理', '/menu', 'el-icon-s-data', NULL, 4, 'Menu');
 INSERT INTO `sys_menu` (`id`, `name`, `path`, `icon`, `description`, `pid`, `page_path`) VALUES (8, '文件管理', '/file', 'el-icon-document', NULL, 4, 'File');
+INSERT INTO `sys_menu` (`id`, `name`, `path`, `icon`, `description`, `pid`, `page_path`) VALUES (27, '菜单管理', '/menu', 'el-icon-s-data', NULL, 4, 'Menu');
+INSERT INTO `sys_menu` (`id`, `name`, `path`, `icon`, `description`, `pid`, `page_path`) VALUES (29, '地图', '/map', 'el-icon-map-location', NULL, NULL, 'Map');
+INSERT INTO `sys_menu` (`id`, `name`, `path`, `icon`, `description`, `pid`, `page_path`) VALUES (30, '数据报表', '/dashbord', 'el-icon-s-marketing', NULL, NULL, 'Dashbord');
+INSERT INTO `sys_menu` (`id`, `name`, `path`, `icon`, `description`, `pid`, `page_path`) VALUES (32, '文章列表', '/article', 'el-icon-document', NULL, NULL, 'Article');
 COMMIT;
 
 -- ----------------------------
@@ -160,8 +161,11 @@ INSERT INTO `sys_role_menu` (`role_id`, `menu_id`) VALUES (1, 2);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`) VALUES (1, 4);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`) VALUES (1, 5);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`) VALUES (1, 6);
-INSERT INTO `sys_role_menu` (`role_id`, `menu_id`) VALUES (1, 7);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`) VALUES (1, 8);
+INSERT INTO `sys_role_menu` (`role_id`, `menu_id`) VALUES (1, 27);
+INSERT INTO `sys_role_menu` (`role_id`, `menu_id`) VALUES (1, 29);
+INSERT INTO `sys_role_menu` (`role_id`, `menu_id`) VALUES (1, 30);
+INSERT INTO `sys_role_menu` (`role_id`, `menu_id`) VALUES (1, 32);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`) VALUES (2, 2);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`) VALUES (2, 4);
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`) VALUES (2, 8);
@@ -215,7 +219,7 @@ INSERT INTO `sys_user` (`id`, `username`, `password`, `nickname`, `email`, `phon
 INSERT INTO `sys_user` (`id`, `username`, `password`, `nickname`, `email`, `phone`, `address`, `createTime`, `avatar`, `role`) VALUES (27, 'zzl', '123456', 'zzl_provider', 'zzl', 'zzl', 'zzl', '2022-12-22 18:26:43', 'https://avatar.csdnimg.cn/9/0/2/0_weixin_44359517.jpg', 'ROLE_PROVIDER');
 INSERT INTO `sys_user` (`id`, `username`, `password`, `nickname`, `email`, `phone`, `address`, `createTime`, `avatar`, `role`) VALUES (29, 'test2', '111111', 'test2', NULL, NULL, NULL, '2022-12-22 11:38:00', 'http://localhost:9091/file/5d972ca209ce4923a4fd0c31f1df403b.jpg', NULL);
 INSERT INTO `sys_user` (`id`, `username`, `password`, `nickname`, `email`, `phone`, `address`, `createTime`, `avatar`, `role`) VALUES (30, 'test导入测试', '423', '发窘', '发电量数据库', '的飞机噢is', '剪短发哦哦； ', '2022-06-22 12:12:11', '', NULL);
-INSERT INTO `sys_user` (`id`, `username`, `password`, `nickname`, `email`, `phone`, `address`, `createTime`, `avatar`, `role`) VALUES (31, 'admin', 'admin', 'admin', NULL, NULL, NULL, '2022-03-27 00:05:34', 'http://localhost:9091/file/a022536d9fbb497fb78578ab619ec5a4.jpg', 'ROLE_ADMIN');
+INSERT INTO `sys_user` (`id`, `username`, `password`, `nickname`, `email`, `phone`, `address`, `createTime`, `avatar`, `role`) VALUES (31, 'admin', 'admin', 'admin', NULL, NULL, NULL, '2022-03-27 00:05:34', 'http://localhost:9091/file/00b415f336824276bacec0ae9f2e1a25.jpg', 'ROLE_ADMIN');
 INSERT INTO `sys_user` (`id`, `username`, `password`, `nickname`, `email`, `phone`, `address`, `createTime`, `avatar`, `role`) VALUES (33, 'test', 'test', 'test_user', 'test', 'test', NULL, '2022-03-23 22:20:12', 'http://localhost:9091/file/862a74021f9d4f35ad6c326b789eaecb.jpg', 'ROLE_USER');
 COMMIT;
 
