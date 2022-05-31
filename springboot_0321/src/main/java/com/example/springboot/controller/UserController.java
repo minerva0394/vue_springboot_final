@@ -1,6 +1,7 @@
 package com.example.springboot.controller;
 
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.poi.excel.ExcelReader;
 import cn.hutool.poi.excel.ExcelUtil;
@@ -23,7 +24,10 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.InputStream;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -194,15 +198,51 @@ public class UserController {
         writer.addHeaderAlias("nickname", "昵称");
         writer.addHeaderAlias("email", "邮箱");
         writer.addHeaderAlias("phone", "电话");
-        writer.addHeaderAlias("address", "地址");
+        writer.addHeaderAlias("address", "学籍");
         writer.addHeaderAlias("createTime", "创建时间");
         writer.addHeaderAlias("avatar", "头像");
         // 一次性将数据写到Excel
         writer.write(list, true);
-
+        //列宽自适应
+        writer.autoSizeColumnAll();
         // 设置浏览器响应格式
         response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8");
         String fileName = URLEncoder.encode("用户信息", "UTF-8");
+        response.setHeader("Content-Disposition", "attachment;filename=" + fileName + ".xlsx");
+
+        ServletOutputStream out = response.getOutputStream();
+        writer.flush(out, true);
+        out.close();
+        writer.close();
+
+    }
+    /**
+     * 模板导出接口
+     * @param response
+     * @throws Exception
+     */
+    @ApiOperation("用户信息导出")
+    @GetMapping("/exportExample")
+    public void exportExample(HttpServletResponse response) throws Exception {
+        // 查询所有数据
+        List<User> list = new ArrayList<>();
+        // 内存写出到浏览器
+        ExcelWriter writer = ExcelUtil.getWriter(true);
+        Map<String, Object> rowHead = new LinkedHashMap<>();
+        rowHead.put("username","此处输入学生/老师的学号");
+        rowHead.put("password","此处输入学生/老师的密码");
+        rowHead.put("nickname","此处输入学生/老师的姓名");
+        rowHead.put("email","此处输入学生/老师姓名的邮箱");
+        rowHead.put("phone","此处输入学生/老师姓名的电话");
+        rowHead.put("address","此处输入学生/老师姓名的学籍");
+        ArrayList<Map<String, Object>> rows = CollUtil.newArrayList(rowHead);
+        // 一次性将数据写到Excel
+        writer.write(rows, true);
+        //列宽自适应
+        writer.autoSizeColumnAll();
+        // 设置浏览器响应格式
+        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8");
+        String fileName = URLEncoder.encode("导入模板", "UTF-8");
         response.setHeader("Content-Disposition", "attachment;filename=" + fileName + ".xlsx");
 
         ServletOutputStream out = response.getOutputStream();
